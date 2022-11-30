@@ -11,7 +11,7 @@ const MovieDetails = lazy(()=> import('./component/MovieDetails.jsx'))
 function App() {
 
   return (
-    <div className="App bg-dark">
+    <div className="App bg-dark box-border">
       <Suspense fallback={<h1>Loading.....</h1>}>
       <Header/>
       <Routes>

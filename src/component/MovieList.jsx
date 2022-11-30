@@ -18,7 +18,7 @@ const MovieList = () => {
       ))
     ) : (
       <div className="movie-error">
-        <h3 className="text-white">{movies.Error}Unable to fetch</h3>
+        <h3 className="text-white">{movies.Error}Loading....</h3>
       </div>
     );
 
@@ -29,23 +29,23 @@ const MovieList = () => {
       ))
     ) : (
       <div className="show-error">
-        <h3>{shows.Error}not recommeded</h3>
+        <h3>{shows.Error} Loading.....</h3>
       </div>
     );
 
   return (
-    <div className="movie-wrapper overflow-hidden">
+    <div className="movie-wrapper">
 
-      <div className="movie-List p-6 overflow-hidden">
-        <h2 className="text-white text-3xl my-4 font-bold">Movies</h2>
-          <Slider {...Settings}>
+      <div className="movie-List p-6">
+        <h2 className="text-white text-3xl text-white my-4 ml-10 font-bold">MOVIES ON AIR</h2>
+          <Slider {...Settings} className='p-6 mx-2'>
             {renderMovie}
             </Slider>
       </div>
 
       <div className="show-List p-6">
-        <h2 className="text-white text-3xl my-4 font-bold">Shows</h2>
-          <Slider {...Settings}>
+        <h2 className="text-white text-3xl text-white my-4 ml-10 font-bold">Shows</h2>
+          <Slider {...Settings} className='p-6 mx-2' >
           {renderShows}
             </Slider>
       </div>
