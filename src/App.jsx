@@ -5,6 +5,7 @@ import Header from './component/Header.jsx';
 import Home from './component/Home.jsx';
 import Footer from './component/Footer.jsx';
 import { SkeletonTheme } from 'react-loading-skeleton';
+import './app.css'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAsyncPopularMovie, getPopularMovie } from './features/movies/movieSlice.jsx';

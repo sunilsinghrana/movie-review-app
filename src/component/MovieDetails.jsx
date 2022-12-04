@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AiFillStar } from "react-icons/ai";
 import { IoMdPlay } from "react-icons/io";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { FiBookmark } from "react-icons/fi";
 import { GiShare } from "react-icons/gi";
 import { useParams } from "react-router-dom";
@@ -26,10 +25,9 @@ const MovieDetails = () => {
   console.log(movieData);
 
   return (
-
-    <div className="border border-red-500 py-6 h-full box-border">
-      <div className="border border-orange-500 h-full">
-        <div className="absolute w-full h-full bg-gradient-to-t from-black border border-yellow-500">
+    <div className="h-[100vh]">
+      <div className="">
+        <div className="absolute w-full h-[100vh] bg-gradient-to-t from-black">
           {" "}
         </div>
         <img
@@ -37,10 +35,10 @@ const MovieDetails = () => {
             movieData.backdrop_path || movieData.poster_path
           }`}
           alt=""
-          className="w-full h-full object-cover"
+          className="w-full h-[100vh] object-cover"
         />
       </div>
-      <div className="flex justify-center ">
+      <div className="flex justify-center relative bottom-[35%]">
         <div className="flex flex-col items-center md:flex-row md:max-w-2xl lg:max-w-3xl absolute xl:max-w-4xl md:mt-[-300px] mt-[-200px] text-white ">
           <div className=" lg:w-[30%] h-auto md:h-[400px] w-[70%] ">
             <img

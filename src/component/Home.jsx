@@ -1,27 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import MovieList from "./MovieList";
 import coverImg from "../assets/coverPage.jpg";
-// import { useDispatch } from "react-redux";
-// import {
-//   fetchAsyncMovies,
-//   fetchAsyncShows,
-// } from "../features/movies/movieSlice";
 
 const Home = () => {
-  // const [term, setTerm] = useState('');
-  // const dispatch = useDispatch();
-  // const movieText = "batman";
-  // const showText = "the walking dead";
-  // useEffect(() => {
-  //   dispatch(fetchAsyncMovies(movieText));
-  //   dispatch(fetchAsyncShows(showText));
-  // }, [dispatch]);
-  // const submitHandler = (e)=>{
-  //   e.preventDefault();
-  //   dispatch(fetchAsyncMovies(term))
-  //   dispatch(fetchAsyncShows(term))
-  //   setTerm('')
-  // }
   return (
     <div className="bg-black">
       <div
