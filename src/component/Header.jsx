@@ -8,7 +8,7 @@ const Header = () => {
       <div className="navbar bg-transparent text-neutral-content absolute shadow-2xl">
         <div className="flex-1">
           <Link
-            className="btn btn-ghost normal-case text-xl text-black font-bold"
+            className="normal-case text-3xl text-gray-400 font-bold"
             to="/"
           >
             MovieDOM

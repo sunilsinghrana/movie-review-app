@@ -1,9 +1,15 @@
 export const Settings = {
     dots: false,
+    className: "center",
+    centerMode: true,
     infinite: true,
-    speed: 500,
+    centerPadding: "60px",
     slidesToShow: 5,
-    slidesToScroll: 3,
+    speed: 500,
+    rows: 2,
+    slidesPerRow: 2,
+    autoplay : true,
+    // slidesToScroll: 3,
       responsive: [
         {
           breakpoint: 1500,

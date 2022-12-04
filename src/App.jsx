@@ -1,26 +1,34 @@
 import {Routes, Route} from 'react-router-dom';
-import { lazy, Suspense} from 'react';
-// import MovieDetails from './component/MovieDetails.jsx';
+import MovieDetails from './component/MovieDetails.jsx';
 import PageNotFound from './component/PageNotFound.jsx';
+import Header from './component/Header.jsx';
+import Home from './component/Home.jsx';
 import Footer from './component/Footer.jsx';
-const Header = lazy(()=> import('./component/Header.jsx'))
-const Home = lazy(()=> import('./component/Home.jsx'))
-const MovieDetails = lazy(()=> import('./component/MovieDetails.jsx'))
-
+import { SkeletonTheme } from 'react-loading-skeleton';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAsyncPopularMovie, getPopularMovie } from './features/movies/movieSlice.jsx';
 
 function App() {
+  const dispatch = useDispatch()
+  
+  useEffect(()=>{
+    dispatch(fetchAsyncPopularMovie());
+  },[dispatch])
+  const popular = useSelector(getPopularMovie)
+  console.log(popular);
 
   return (
     <div className="App bg-dark box-border">
-      <Suspense fallback={<h1>Loading.....</h1>}>
+     <SkeletonTheme baseColor='#313131' highlightColor='#525252'>
       <Header/>
       <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/movie/:imdbID' element={<MovieDetails/>} />
+        <Route index element={<Home/>} />
+        <Route path='movie/:id' element={<MovieDetails/>} />
         <Route element={<PageNotFound/>}/>
       </Routes>
       <Footer/>
-      </Suspense>
+      </SkeletonTheme>
     </div>
   )
 }

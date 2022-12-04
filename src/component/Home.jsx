@@ -1,35 +1,34 @@
 import React, { useEffect, useState } from "react";
 import MovieList from "./MovieList";
-import coverImg from "../assets/coverpage.jpg";
-import { useDispatch } from "react-redux";
-import {
-  fetchAsyncMovies,
-  fetchAsyncShows,
-} from "../features/movies/movieSlice";
+import coverImg from "../assets/coverPage.jpg";
+// import { useDispatch } from "react-redux";
+// import {
+//   fetchAsyncMovies,
+//   fetchAsyncShows,
+// } from "../features/movies/movieSlice";
 
 const Home = () => {
-  const [term, setTerm] = useState('');
-  const dispatch = useDispatch();
-  const movieText = "batman";
-  const showText = "vikings";
-  useEffect(() => {
-    dispatch(fetchAsyncMovies(movieText));
-    dispatch(fetchAsyncShows(showText));
-  }, [dispatch]);
-  const submitHandler = (e)=>{
-    e.preventDefault();
-    dispatch(fetchAsyncMovies(term))
-    dispatch(fetchAsyncShows(term))
-    setTerm('')
-  }
+  // const [term, setTerm] = useState('');
+  // const dispatch = useDispatch();
+  // const movieText = "batman";
+  // const showText = "the walking dead";
+  // useEffect(() => {
+  //   dispatch(fetchAsyncMovies(movieText));
+  //   dispatch(fetchAsyncShows(showText));
+  // }, [dispatch]);
+  // const submitHandler = (e)=>{
+  //   e.preventDefault();
+  //   dispatch(fetchAsyncMovies(term))
+  //   dispatch(fetchAsyncShows(term))
+  //   setTerm('')
+  // }
   return (
     <div className="bg-black">
       <div
-        className="hero h-[30rem] shadow-inner shadow-black"
+        className="hero h-[30rem]"
         style={{
           backgroundImage: `url(${coverImg})`,
           backgroundPosition: "top",
-          boxShadow:'inset 0 2px 4px 0 black'
         }}
       >
         <div className="hero-overlay bg-opacity-60"></div>
@@ -42,10 +41,12 @@ const Home = () => {
           </div>
 
           <div className="Search-bar w-4/5">
-          <form onSubmit={submitHandler} className="flex flex-row w-full items-center">
+          <form 
+          // onSubmit={submitHandler} 
+          className="flex flex-row w-full items-center">
           <input
-          value={term}
-          onChange={(e)=> setTerm(e.target.value)}
+          // value={term}
+          // onChange={(e)=> setTerm(e.target.value)}
           type="text"
           placeholder="Search for a movie, tv show, person....."
           className="input input-bordered bg-white w-full text-black rounded-xl"

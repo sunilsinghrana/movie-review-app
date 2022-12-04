@@ -1,94 +1,108 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { AiFillStar } from "react-icons/ai";
+import { IoMdPlay } from "react-icons/io";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FiBookmark } from "react-icons/fi";
+import { GiShare } from "react-icons/gi";
 import { useParams } from "react-router-dom";
 import {
-  getSelectMovieOrShow,
-  fetchAsyncMoviesOrShows,
+  fetchAsyncSelectedMovie, getSelectMovieOrShow,
 } from "../features/movies/movieSlice";
 import { removeSelectMovieOrShow } from "../features/movies/movieSlice";
 
 const MovieDetails = () => {
   const dispatch = useDispatch();
-  const { imdbID } = useParams();
-  const data = useSelector(getSelectMovieOrShow);
+  const { id } = useParams();
+  const movieData = useSelector(getSelectMovieOrShow);
 
   useEffect(() => {
-    dispatch(fetchAsyncMoviesOrShows(imdbID));
+    dispatch(fetchAsyncSelectedMovie(id));
     return ()=>{
       dispatch(removeSelectMovieOrShow())
     }
-  }, [dispatch, imdbID]);
+  }, [dispatch, id]);
+  
+  console.log(movieData);
 
   return (
-    <div className="min-h-screen grid place-items-center font-mono bg-slate-800">
-      {Object.keys(data).length === 0 ? 
-      (<div>....Loading</div>)
-    :(
-      <div className="rounded-md bg-slate-700 shadow-lg">
-        <div className="md:flex px-4 leading-none max-w-4xl">
-          <div className="flex-none ">
+
+    <div className="border border-red-500 py-6 h-full box-border">
+      <div className="border border-orange-500 h-full">
+        <div className="absolute w-full h-full bg-gradient-to-t from-black border border-yellow-500">
+          {" "}
+        </div>
+        <img
+          src={`https://image.tmdb.org/t/p/original${
+            movieData.backdrop_path || movieData.poster_path
+          }`}
+          alt=""
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="flex justify-center ">
+        <div className="flex flex-col items-center md:flex-row md:max-w-2xl lg:max-w-3xl absolute xl:max-w-4xl md:mt-[-300px] mt-[-200px] text-white ">
+          <div className=" lg:w-[30%] h-auto md:h-[400px] w-[70%] ">
             <img
-              src={data.Poster}
-              alt={data.Title}
-              className="h-[35rem] w-96 rounded-md shadow-2xl transform -translate-y-4 border-4 border-gray-300 shadow-lg"
+              className="w-[100%] h-full md:h-auto object-cover rounded-md"
+              src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`}
+              alt=""
             />
           </div>
-
-          <div className="flex-col text-white">
-            <p className="px-2 pt-2 text-2xl font-bold">
-              {data.Title} {data.Year}
+          <div className="float-left w-[70%] md:pl-12 ">
+            <p className="text-3xl md:text-5xl mb-3 mt-3 md:mt-0">
+              {movieData.title || movieData.original_title}{" "}
             </p>
-            <hr className="hr-text" data-content="" />
-            <div className="text-md flex justify-between px-4 my-2">
-              <span className="font-bold">
-                {" "}
-                {data.Rated} | {data.Runtime} | {data.Genre}
-              </span>
-              <span className="font-bold"></span>
+            <div className="flex flex-row items-center ">
+              <div className="flex flex-row justify-center items-center mr-5 pb-2">
+                <AiFillStar className="text-3xl mr-2" />
+                <p className="text-4xl ">
+                  {movieData?.vote_average?.toFixed(1)}{" "}
+                </p>
+              </div>
+              <div className="flex flex-col">
+                <div className="grid grid-flow-col auto-cols-max gap-4 ">
+                  <p className="text-cyan-600 text-sm md:text-base">
+                    Released: {movieData?.release_date}{" "}
+                  </p>
+                  <p className="text-cyan-600 text-sm md:text-base">
+                    {movieData?.runtime} min
+                  </p>
+                </div>
+
+                <div className="grid grid-flow-col auto-cols-max gap-4 mb-3">
+                  {movieData.genres &&
+                    movieData.genres.slice(0, 5).map((genre, i) => (
+                      <span key={i} className="text-sm  md:text-base">
+                        {genre.name}
+                      </span>
+                    ))}
+                </div>
+              </div>
             </div>
-            <p className="px-4 mt-4 text-left text-xl text-bold">Summary</p>
-            <p className="hidden md:block px-4 mb-4 text-sm text-left">
-              {" "}
-              {data.Plot}{" "}
-            </p>
-            <p className="px-4 my-4 text-left text-bold">Director: {data.Director}</p>
-            <p className="px-4 my-4 text-left text-bold">Actors: {data.Actors}</p>
-            <p className="px-4 my-4 text-left text-bold">Genres: {data.Genre}</p>
-            <p className="px-4 my-4 text-left text-bold">Languages: {data.Language}</p>
-            <p className="px-4 my-4 text-left text-bold">Awards: {data.Awards}</p>
-            <p className="px-4 my-4 text-left text-bold">Release Date: {data.DVD}</p>
 
-            <p className="flex text-md px-4 my-2">
-              {/* Rating: {data.Ratings[0].Value} */}
-            </p>
-
-            <div className="text-xs">
+            <p className="text-gray-300 mb-8">{movieData.overview} </p>
+            <div className="flex flex-row items-center ">
               <button
-                type="button"
-                className="border border-gray-400 text-gray-400 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-900 focus:outline-none focus:shadow-outline"
+                // onClick={() => setShowModal(true)}
+                className="border text-[#FFFDE3] text-base border-gray-300 py-2 px-5 flex flex-row items-center hover:bg-cyan-600 hover:border-cyan-600 mb-8 md:mb-0"
               >
-                TRAILER
+                <IoMdPlay className="mr-3" />
+                Watch Trailer
               </button>
-
-              <button
-                type="button"
-                className="border border-gray-400 text-gray-400 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-900 focus:outline-none focus:shadow-outline"
-              >
-                IMDB
-              </button>
-
-              <button
-                type="button"
-                className="border border-gray-400 text-gray-400 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-900 focus:outline-none focus:shadow-outline"
-              >
-                AMAZON
-              </button>
+              <p>
+                <GiShare className="text-gray-300 text-2xl ml-3 mb-8 md:mb-0" />
+              </p>
+              <p>
+                <FiBookmark className="text-gray-300 text-2xl ml-3 mb-8 md:mb-0" />
+              </p>
             </div>
           </div>
+          <div></div>
         </div>
       </div>
-      )}
     </div>
+    
   );
 };
 
